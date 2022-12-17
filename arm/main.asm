@@ -12,13 +12,13 @@ ldr   r0,[pc,#96]
 mov   r1,r3
 bl    0xfbd8  <__isoc99_scanf>
 bl    0x8cd4  <key1>
-mov   r3,r0
+mov   r3,r0    :  key1 함수에서의 r0값을 r3로 옮긴다.
 bl    0x8cf0  <key2>
-mov   r3,r0
-add   r4,r3
+mov   r3,r0    :  key2 함수에서의 r0값을 r4로 옮긴다.
+add   r2,r4,r3    : r2 = r4 + r3  
 ldr   r3,[r11,#-16]
-cmp   r2,r3
-bne   0x8da8  <main + 108>
+cmp   r2,r3    : r2와 r3를 비교한다.
+bne   0x8da8  <main + 108>  : 비교한 값이 같다면 
 ldr   r0,[pc,#44]
 bl    0x1050c <puts>
 ldr   r0,[pc,#40]
