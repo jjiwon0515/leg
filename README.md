@@ -20,29 +20,29 @@ sub   sp,sp,#12                     # sp=sp-12
 mov   r3,#0                         # r3=0
 str   r3,[r11,#-16]                 #
 ldr   r0,[pc,#104]                  #
-bl    0xfbbc <printf>               # printf 함수를 call 한다
+bl    0xfbbc <printf>                       # printf 함수를 call 한다
 sub   r3,r11,#16                    # r3 = r11 - 16
 ldr   r0,[pc,#96]                   # 
 mov   r1,r3                         # r1 = r3
 bl    0xfbd8  <__isoc99_scanf>      # scanf 함수를 call 한다
-bl    0x8cd4  <key1>                # key1 함수를 call 한다
+bl    0x8cd4  <key1>                      # key1 함수를 call 한다
 mov   r4,r0                         # key1 함수에서의 r0값을 r4로 옮긴다.
-bl    0x8cf0  <key2>                # key2 함수를 call 한다
+bl    0x8cf0  <key2>                      # key2 함수를 call 한다
 mov   r3,r0                         # key2 함수에서의 r0값을 r3로 옮긴다.
 add   r4,r4,r3                      # r4 = r4 + r3  
-bl    0x8cf0  <key3>                # key3 함수를 호출한다.
+bl    0x8cf0  <key3>                      # key3 함수를 호출한다.
 mov   r3,r0                         # r3 = r0(key3에서 가져온 r0값이다)
 add   r2,r4,r3                      # r2 = r3+r4  -> r2는 key1()+key2()+key3() 값을 가진다.
 ldr   r3,[r11,#-16]                 #
 cmp   r2,r3                         # r2와 r3를 비교한다. -> leg.c에서 if문에 해당되는 부분이다.
-bne   0x8da8  <main + 108>          #
+bne   0x8da8  <main + 108>                      #
 ldr   r0,[pc,#44]                   #
-bl    0x1050c <puts>                #                
+bl    0x1050c <puts>                      #                
 ldr   r0,[pc,#40]                   #
-bl    0xf89c  <system>              #
-b     0x8db0  <main + 116>          #
+bl    0xf89c  <system>                      #
+b     0x8db0  <main + 116>                      #
 ldr   r0,[pc,#32]                   #
-bl    0x1050c <puts>                #
+bl    0x1050c <puts>                      #
 mov   r3,#0                         #
 mov   r0,r3                         #
 sub   sp,r11,#8                     #
@@ -52,9 +52,9 @@ andeq r10,r6,,r12,lsl,#9            #
 
 <key1>
 0x00008cd4<+0>:     push  {r11}         # 레지스터 r11을 push한다.
-0x00008cd8<+4>:     add   r11,sp,#0     # r11 = sp(0x00007cd8) + 0
-0x00008cdc<+8>:     mov   r3,pc         # r3=pc(0x00007cdc) **pc는 어느 주소를 가져오는 것인가
-0x00008ce0<+12>:    mov   r0,r3         # r0=r3(0x00007cdc)
+0x00008cd8<+4>:     add   r11,sp,#0     # r11 = sp(0x00008cd8) + 0
+0x00008cdc<+8>:     mov   r3,pc         # r3=pc(0x00008cdc) **pc는 어느 주소를 가져오는 것인가
+0x00008ce0<+12>:    mov   r0,r3         # r0=r3(0x00008cdc)
 0x00008ce4<+16>:    sub   sp,r11,#0     # sp= r11 - 0 
 0x00008ce8<+20>:    pop   {r11}         # r11(0x00007cd8)을 pop(빼낸다)
 0x00008cec<+24>:    bx    lr            # 원래 함수로 돌아간다.
@@ -86,3 +86,9 @@ andeq r10,r6,,r12,lsl,#9            #
 0x00008d34<+20>:    pop   {r11}         # r11 레지스터를 뺀다
 0x00008d38<+24>:    bx    lr            # 호출 함수로 되돌아간다.
 </pre>
+
+각각의 함수에서 r0 값들을 구해서 더해주면 답을 얻을 수 있다. 
+key1 함수부터 보면 r0은 결국 pc 값을 가지게 된다. 여기서 pc는 0x00008cdc
+key2 함수도 r0이 메인 함수에서 key1에서 구한 값과 합하고 나중에 비교할 때 영향을 주기 때문에 r0이 무슨 값을 가지는지 본다.
+r3 = pc -> r3 = r3 + 4이기 때문에 r0은 0x00008d04 + 0x4이다.
+key3 함수에서는 
