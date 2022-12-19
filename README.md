@@ -1,7 +1,7 @@
 # leg
 ![leg_c](https://user-images.githubusercontent.com/107084512/208231173-4b5ce66e-4427-4266-844f-1665a290dd1b.png)
-c코드를 보면 중간에 pc라는 것을 볼 수 있다. 구글링해서 찾아본 결과 pc는 EIP처럼 현재 수행하고 있는 주소값을 알려주는 레지스터이다.
-정확한 값을 알기 위해서는 주어진 leg.asm 어셈블리 파일을 통해서 주소값을 확인해야한다고 생각했다.
+c코드를 보면 중간에 pc라는 것을 볼 수 있다. 구글링해서 찾아본 결과 pc는 EIP처럼 현재 수행하고 있는 주소값을 알려주는 레지스터이다.<br>
+정확한 값을 알기 위해서는 주어진 leg.asm 어셈블리 파일을 통해서 주소값을 확인해야한다고 생각했다.<br>
 
 ![leg_main](https://user-images.githubusercontent.com/107084512/208231175-c0368c52-13ea-47ac-ba8a-9b74164fbaea.png)
 
